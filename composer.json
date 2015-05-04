@@ -1,7 +1,7 @@
 {
   "name": "sygmaa/grids",
   "description": "A Datagrid widget for laravel 5. It easily generate datatables from your entities.",
-  "homepage": "https://github.com/zofe/rapyd-laravel",
+  "homepage": "https://github.com/sygmaa/grids",
   "keywords": ["laravel", "datatable", "datagrid", "grids", "sygmaa", "laravel5", "table laravel"],
   "authors": [
     {
