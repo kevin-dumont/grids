@@ -2,7 +2,20 @@
   "name": "sygmaa/grids",
   "description": "A Datagrid widget for laravel 5. It easily generate datatables from your entities.",
   "homepage": "https://github.com/sygmaa/grids",
-  "keywords": ["laravel", "datatable", "datagrid", "grids", "sygmaa", "laravel5", "table laravel"],
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "tables",
+    "bootstrap",
+    "tables",
+    "datatable",
+    "datagrid",
+    "grids",
+    "sygmaa",
+    "laravel 5",
+    "table laravel"
+  ],
   "authors": [
     {
       "name": "Kévin DUMONT",
@@ -18,5 +31,11 @@
     "psr-4": {
       "Sygmaa\\Grids\\": "src/"
     }
-  }
+  },
+  "support": {
+    "email": "k.dumont1994@gmail.com",
+    "source": "https://github.com/sygmaa/grids",
+    "issues": "https://github.com/sygmaa/grids/issues"
+  },
+  "minimum-stability": "dev"
 }

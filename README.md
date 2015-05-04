@@ -13,7 +13,15 @@ The generated HTML use Twitter Bootstrap, but you can override templates.
 
 ## Install
 
-First, add a new Service provider in your **config/app.php** :
+First, add this in your **composer.json**
+
+```
+  "require": {
+    "sygmaa/grids": "dev-master"
+  }
+```
+
+Then, add a new Service provider in your **config/app.php** :
 
 `'Sygmaa\Grids\GridsServiceProvider',`
 

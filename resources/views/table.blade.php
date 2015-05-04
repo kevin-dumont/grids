@@ -24,15 +24,15 @@
             }
         </script>
         <div class="col-md-12">
-            <label for="grids-massActions">Action :</label>
+            <label for="grids-massActions">@lang('grids:grids.action') :</label>
             <select name="urlMassAction" class="form-control" id="grids-massActions" onchange="check()">
-                <option>Selectionnez une action</option>
+                <option>@lang('grids:grids.selectAction')</option>
                 @foreach($massActions as $action)
                     <option value="{{ $action->getUrl() }}">{{ $action->getLabel() }}</option>
                 @endforeach
             </select>
             <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-            <input class="btn btn-primary" type="submit"/>
+            <input class="btn btn-primary" onclick="return confirm('@lang("grids:grids.areYouSure")';" type="submit"/>
         </div>
     @endif
 
@@ -70,7 +70,7 @@
                 @endforeach
 
                 @if($actions->getSingleActions())
-                    <th>Actions</th>
+                    <th>@lang('grids:grids.action')</th>
                 @endif
             </tr>
         </thead>
