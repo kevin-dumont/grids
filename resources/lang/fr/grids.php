@@ -12,8 +12,8 @@ return [
     'total'        => 'au total',
     'page'         => 'page',
     'of'           => 'sur',
+    'to'           => 'à',
     'selectAction' => 'Sélectionnez une action',
-    'action'       => 'Action',
+    'actions'      => 'Actions',
     'areYouSure'   => 'Etes-vous certain ?',
-
 ];

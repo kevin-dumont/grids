@@ -13,9 +13,14 @@ class GridsServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'grids');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'grids');
+
         $this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/grids/')
         ], 'grids');
+
+        $this->publishes([
+            __DIR__.'/../assets' => public_path('vendor/grids'),
+        ], 'public');
     }
 
     /**

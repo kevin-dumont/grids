@@ -3,6 +3,7 @@
 namespace Sygmaa\Grids;
 
 use Sygmaa\Grids\Components\Collection;
+use Sygmaa\Grids\Fields\Field;
 
 class FieldsCollection extends Collection
 {

@@ -4,6 +4,7 @@ namespace Sygmaa\Grids;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Sygmaa\Grids\Fields\Field;
 
 /**
  * Class Grids
@@ -104,11 +105,9 @@ class Grids {
 
             foreach($this->fieldsCollection as $field) {
 
-                if($field->isFilterable()){
+                if($field->isFilterable())
+                    $model = $field->getFilters($model);
 
-                    if($input = $this->request->input($field->getName()))
-                        $model = $model->orWhere($field->getName(), 'LIKE', "%$input%");
-                }
 
                 if($field->isSortable()){
 
