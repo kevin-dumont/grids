@@ -41,13 +41,17 @@ In your controller :
 $grid = Grids::make(new Model())
     ->paginate(15) // Pagination
     ->reset() // Show a reset button to clear filters
-    ->addField(Grids::field('id', 'ID') // Add a new field (name, Label)
+    ->addField(Grids::text('id', 'ID') // Add a new field (name, Label)
         ->setPrimary() // Define the primary key
         ->setVisible(false) // The field will be hidden
     )
-    ->addField(Grids::field('name', 'Name')
+    ->addField(Grids::text('name', 'Name')
         ->setSortable() // An order by on this field will be available
         ->setFilterable() // We can search keywords in an input
+    )
+    ->addField(Grids::date('updated_at', 'Dernière modification', 'd/m/Y H:i:s')
+        ->setSortable()
+        ->setFilterable()
     )
     ->addAction(Grids::massAction("Delete", URL::route('model.delete'))) // Add a mass action to delete entries
     ->addAction(Grids::action("Edit", function($label, $row){
