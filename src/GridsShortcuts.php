@@ -60,9 +60,41 @@ class GridsShortcuts {
      * @param $label
      * @return Fields\Text
      */
-    public function text($name, $label)
+    public function text($name, $label = null)
     {
-        return new Fields\Text($this->request, $name, ($label !== "") ? $label : $name);
+        return new Fields\Text($this->request, $name, isset($label) ? $label : $name);
+    }
+
+    /**
+     * @param $name
+     * @param $label
+     * @param $modelName
+     * @return Fields\ManyRelation
+     */
+    public function manyRelation($name, $label, $modelName)
+    {
+        return new Fields\ManyRelation($this->request, $name, $label, $modelName);
+    }
+
+    /**
+     * @param $name
+     * @param $label
+     * @param $modelName
+     * @return Fields\ManyRelation
+     */
+    public function oneRelation($name, $label, $modelName)
+    {
+        return new Fields\OneRelation($this->request, $name, $label, $modelName);
+    }
+
+    /**
+     * @param $name
+     * @param $label
+     * @return Fields\Boolean
+     */
+    public function boolean($name, $label)
+    {
+        return new Fields\Boolean($this->request, $name, $label);
     }
 
     /**

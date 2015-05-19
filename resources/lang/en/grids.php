@@ -1,8 +1,11 @@
 <?php
 
 return [
+    'yes'          => 'Yes',
+    'no'           => 'No',
     'search.by'    => 'Search by :name',
     'apply'        => 'Apply',
+    'ok'           => 'Ok',
     'reset'        => 'Reset',
     'first'        => 'First',
     'previous'     => 'Previous',
@@ -13,7 +16,7 @@ return [
     'page'         => 'page',
     'of'           => 'of',
     'to'           => 'to',
-    'selectAction' => 'Select an action',
+    'select'       => 'Please select',
     'actions'      => 'Actions',
     'areYouSure'   => 'Are you sure ?',
 ];

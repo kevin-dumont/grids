@@ -11,9 +11,12 @@ class Text extends Field
     /**
      * @return $this
      */
-    function render($data)
+    function render($row)
     {
-        return $data;
+        $nameField = $this->getName();
+        if(isset($row->$nameField))
+            return $row->$nameField;
+        return "";
     }
 
     /**

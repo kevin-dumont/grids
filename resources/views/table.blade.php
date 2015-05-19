@@ -1,19 +1,21 @@
 {{-- Data table --}}
 
-<form id="grids-form">
+{!! Form::open(['id' => 'grids-form']) !!}
 
-    @if($massActions = $actions->getMassActions())
+    @if($massActions )
         <div class="col-md-12">
             <div style="margin-top:10px" class="pull-right">
-                <label for="grids-massActions">@lang('grids::grids.actions') :</label>
-                <select name="urlMassAction" class="form-control" id="grids-massActions" onchange="check()">
-                    <option>@lang('grids::grids.selectAction')</option>
-                    @foreach($massActions as $action)
-                        <option value="{{ $action->getUrl() }}">{{ $action->getLabel() }}</option>
-                    @endforeach
-                </select>
-                <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-                <input class="btn btn-primary" onclick="return confirm('@lang("grids::grids.areYouSure")');" type="submit"/>
+                {!! Form::label('grids-massActions', Lang::get('grids::grids.actions') . " : ") !!}
+                {!! Form::select('urlMassAction', [null =>  Lang::get("grids::grids.select")] + $massActions, null, [
+                    'class'    => "form-control",
+                    'id'       => "grids-massActions",
+                    'onchange' => "check()"
+                ]) !!}
+                {!! Form::hidden('_token', csrf_token()) !!}
+                {!! Form::submit(Lang::get("grids::grids.ok"), [
+                    'class'   => "btn btn-primary",
+                    'onclick' => "return confirm('" . Lang::get("grids::grids.areYouSure") . "');"
+                ]) !!}
             </div>
         </div>
         <div class="clearfix"></div>
@@ -64,31 +66,28 @@
                 @if($actions)
                     @foreach($actions as $action)
                         @if($action->isMassAction())
-                            <td class="text-center">
-                                <?php $primary = $fields->getPrimary()->getName() ?>
-                                <input type="checkbox" name="grids-ids[]" value="{{ $row->$primary }}">
-                            </td>
+                            <?php $primary = $fields->getPrimary()->getName() ?>
+                            <td class="text-center">{!! Form::checkbox('grids-ids[]', $row->$primary) !!}</td>
                         @endif
                     @endforeach
                 @endif
 
                 @foreach($fields as $field)
                     @if($field->isVisible())
-                        <td>
-                            @if(isset($row->$field))
-                                {{ $field->render($row->$field) }}
-                            @endif
-                        </td>
+                        <td>{{ $field->render($row) }}</td>
                     @endif
                 @endforeach
 
-                @foreach($singlesAction as $action)
+                @if($singlesAction)
                     <td>
-                        {!! $action->getCallback($action->getLabel(), $row) !!}
+                        @foreach($singlesAction as $action)
+                            {!! $action->getCallback($action->getLabel(), $row) !!}
+                        @endforeach
                     </td>
-                @endforeach
+                @endif
+
             </tr>
         @endforeach
         </tbody>
     </table>
-</form>
+{!! Form::close() !!}

@@ -9,8 +9,7 @@
 
     @if(isset($filterable))
         <div class="btn-group">
-            <input type="submit" class="btn btn-primary" value="@lang('grids::grids.apply')"/>
-
+            {!! Form::submit(Lang::get('grids::grids.apply'), ['class' => "btn btn-primary",]) !!}
             @if($reset)
                 <a class="btn btn-default" href="{{ $request->url() }}">@lang('grids::grids.reset')</a>
             @endif

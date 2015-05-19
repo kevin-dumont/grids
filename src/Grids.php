@@ -118,7 +118,7 @@ class Grids {
                         $model = $model->orderBy($field->getName(), $inputValue);
                 }
             }
-            $this->rows = $model->paginate($this->pagination, $this->fieldsCollection->getAll())->setPath($this->request->url());
+            $this->rows = $model->paginate($this->pagination)->setPath($this->request->url());
         }
         return $this->rows;
     }
@@ -161,9 +161,20 @@ class Grids {
      */
     public function renderTable()
     {
+        $massActions = $this->actionsCollection->getMassActions();
+
+        $array = array();
+
+        foreach($massActions as $action) {
+            $array[$action->getUrl()] = $action->getLabel();
+        }
+
+
+
         return view('grids::table')
             ->with('fields', $this->fieldsCollection)
             ->with('actions', $this->actionsCollection)
+            ->with('massActions', $array)
             ->with('request', $this->request)
             ->with('rows', $this->rows());
     }

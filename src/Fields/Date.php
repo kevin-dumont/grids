@@ -32,10 +32,14 @@ class Date extends Field
      * @param $data
      * @return mixed
      */
-    function render($data)
+    function render($row)
     {
-        $datetime = new \DateTime($data);
-        return $datetime->format($this->formatting);
+        $nameField = $this->getName();
+        if(isset($row->$nameField)) {
+            $datetime = new \DateTime($row->$nameField);
+            return $datetime->format($this->formatting);
+        }
+        return "";
     }
 
     /**
