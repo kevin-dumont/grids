@@ -66,7 +66,8 @@ class OneRelation extends Field
     {
         $relation = $this->relation;
         $name     = $this->name;
-        return $row->$relation->$name;
+        if($row->$relation)
+            return $row->$relation->$name;
     }
 
     /**
