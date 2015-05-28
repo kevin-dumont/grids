@@ -97,6 +97,11 @@ class GridsShortcuts {
         return new Fields\Boolean($this->request, $name, $label);
     }
 
+    public function custom($name, $label, $callback)
+    {
+        return new Fields\Custom($this->request, $name, $label, $callback);
+    }
+
     /**
      * @param $name
      * @param $label
