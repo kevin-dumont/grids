@@ -74,7 +74,7 @@
 
                 @foreach($fields as $field)
                     @if($field->isVisible())
-                        <td>{{ $field->render($row) }}</td>
+                        <td>{!! $field->render($row) !!}</td>
                     @endif
                 @endforeach
 
