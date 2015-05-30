@@ -43,6 +43,21 @@ class Grids {
     protected $actionsCollection;
 
     /**
+     * @var array
+     */
+    protected $conditions;
+
+    /**
+     * @var array
+     */
+    protected $inConditions;
+
+    /**
+     * @var array
+     */
+    protected $orders;
+
+    /**
      * Constructor
      */
     public function __construct(Request $request, Model $model)
@@ -53,6 +68,9 @@ class Grids {
         $this->model             = $model;
         $this->reset             = false;
         $this->pagination        = 15;
+        $this->conditions        = array();
+        $this->inConditions      = array();
+        $this->orders            = array();
     }
 
     /**
@@ -118,6 +136,22 @@ class Grids {
                         $model = $model->orderBy($field->getName(), $inputValue);
                 }
             }
+
+            foreach($this->conditions as $condition) {
+                if(isset($condition['operator']))
+                    $model = $model->where($condition['key'], $condition['operator'], $condition['value']);
+                else
+                    $model = $model->where($condition['key'], $condition['value']);
+            }
+
+            foreach($this->inConditions as $condition) {
+                $model = $model->whereIn($condition['key'], $condition['array']);
+            }
+
+            foreach($this->orders as $order) {
+                $model = $model->orderBy($order['key'], $order['value']);
+            }
+
             $this->rows = $model->paginate($this->pagination)->setPath($this->request->url());
         }
         return $this->rows;
@@ -169,13 +203,62 @@ class Grids {
             $array[$action->getUrl()] = $action->getLabel();
         }
 
-
-
         return view('grids::table')
             ->with('fields', $this->fieldsCollection)
             ->with('actions', $this->actionsCollection)
             ->with('massActions', $array)
             ->with('request', $this->request)
             ->with('rows', $this->rows());
+    }
+
+    /**
+     * @param $key
+     * @param $operator
+     * @param null $value
+     * @return $this
+     */
+    public function where($key, $operator, $value = null)
+    {
+        $condition = array(
+            'key' => $key
+        );
+
+        if(isset($value)) {
+            $condition['operator'] = $operator;
+            $condition['value']    = $value;
+        } else {
+            $condition['value'] = $operator;
+        }
+
+        $this->conditions[] = $condition;
+        return $this;
+    }
+
+    /**
+     * @param $key
+     * @param $array
+     * @return $this
+     */
+    public function whereIn($key, $array)
+    {
+        $condition = array();
+        $condition['key'] = $key;
+        $condition['array'] = $array;
+        $this->inConditions[] = $condition;
+        return $this;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return $this
+     */
+    public function orderBy($key, $value)
+    {
+        $order = array();
+        $order['key'] = $key;
+        $order['value'] = $value;
+        $this->orders[] = $order;
+        return $this;
     }
 }
