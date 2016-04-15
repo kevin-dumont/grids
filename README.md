@@ -34,7 +34,7 @@ After, if you want override views or languages, you can run this command :
 `php artisan vendor:publish`
 
 Then, you must add these lines in your template :
-```
+```php
     {!! Grids::head() !!}
     {!! Grids::styles() !!}
     {!! Grids::scripts() !!}
@@ -44,7 +44,7 @@ Then, you must add these lines in your template :
 
 In your controller :
 
-```
+```php
 $grid = Grids::make(new Model())
     // Pagination; 15 is the number of results to show by page
     ->paginate(15) 
@@ -106,7 +106,7 @@ $grid = Grids::make(new Model())
 
 And the template :
 
-```
+```php
 <div class="panel-body">
     <!-- Show the filter form -->
     {!! $grid->renderFilters() !!}
